@@ -22,4 +22,7 @@ The class has 2 methods -
       6. target_Q is calculated from the minimum Target Critic Q using Bellman equation. done variable from Transition is used to ignore next state's target Q if the episode is over.
       7. Given the state, action from each Transition, the 2 Model Critics are forward propagated to calculate respective target_Q's.
       8. The loss for Model Critics is calculated as the sum of the Mean Squared Error loss for the 2 Model Critic networks with respect to the target_Q calculated using Target networks.
-      9. Model Critic networks are backpropagated using this calculated loss.                                                                                        
+      9. Model Critic networks are backpropagated using this calculated loss.  
+      10. Every 2 iterations, the Model Actor is backpropagated using Gradient Ascent.
+      11. Actor Target parameters are updated using Polyak averaging (tau = 0.005).
+      12. Critic Target parameters are updated using Polyak averaging (tau = 0.005). Polyak averaging is used to help Target networks generate consistent outputs. An impulsive change in Model networks minutely affects the Target network parameters (multiplication factor of 0.005), that too every 2 iterations (and hence Delayed).
